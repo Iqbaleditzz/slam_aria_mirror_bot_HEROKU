@@ -10,12 +10,12 @@ from telegram.ext import run_async, CallbackContext, CommandHandler
 from bot import dispatcher
 
 def shorten(description, info = 'anilist.co'):
-    msg = "" 
+    msg = ""
     if len(description) > 700:
-           description = description[0:500] + '....'
-           msg += f"\n*Description*: _{description}_[Read More]({info})"
+        description = description[:500] + '....'
+        msg += f"\n*Description*: _{description}_[Read More]({info})"
     else:
-          msg += f"\n*Description*:_{description}_"
+        msg += f"\n*Description*:_{description}_"
     return msg
 
 

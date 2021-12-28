@@ -127,7 +127,6 @@ class MirrorListener(listeners.MirrorListeners):
                 fs_utils.clean_download(download.path())
             except Exception as e:
                 LOGGER.error(str(e))
-                pass
             count = len(download_dict)
         if self.message.from_user.username:
             uname = f"@{self.message.from_user.username}"
@@ -151,7 +150,7 @@ class MirrorListener(listeners.MirrorListeners):
             msg = f'<b> Filename: </b><code>{download_dict[self.uid].name()}</code>\n<b> Size: </b><code>{size}</code>'
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                 msg += '\n<b> Type: </b><code>Folder</code>'
-                msg += f'\n<b>𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆</b> Arnavs Mirror Bot'
+                msg += '\n<b>𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆</b> Arnavs Mirror Bot'
             else:
                 msg += f'\n<b>☞ 🌀 Type: </b><code>{typ}</code>'
             buttons = button_build.ButtonMaker()
@@ -265,18 +264,21 @@ def _mirror(bot, update, isTar=False, extract=False):
                 file = i
                 break
 
-        if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) or len(link) == 0:
-            if file is not None:
-                if file.mime_type != "application/x-bittorrent":
-                    listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
-                    tg_downloader = TelegramDownloadHelper(listener)
-                    tg_downloader.add_download(reply_to, f'{DOWNLOAD_DIR}{listener.uid}/', name)
-                    sendStatusMessage(update, bot)
-                    if len(Interval) == 0:
-                        Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
-                    return
-                else:
-                    link = file.get_file().file_path
+        if (
+            not bot_utils.is_url(link)
+            and not bot_utils.is_magnet(link)
+            or len(link) == 0
+        ) and file is not None:
+            if file.mime_type != "application/x-bittorrent":
+                listener = MirrorListener(bot, update, pswd, isTar, tag, extract)
+                tg_downloader = TelegramDownloadHelper(listener)
+                tg_downloader.add_download(reply_to, f'{DOWNLOAD_DIR}{listener.uid}/', name)
+                sendStatusMessage(update, bot)
+                if len(Interval) == 0:
+                    Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
+                return
+            else:
+                link = file.get_file().file_path
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
@@ -305,7 +307,7 @@ def _mirror(bot, update, isTar=False, extract=False):
             sendMessage(res, bot, update)
             return
         if TAR_UNZIP_LIMIT is not None:
-            LOGGER.info(f'Checking File/Folder Size')
+            LOGGER.info('Checking File/Folder Size')
             limit = TAR_UNZIP_LIMIT
             limit = limit.split(' ', maxsplit=1)
             limitint = int(limit[0])

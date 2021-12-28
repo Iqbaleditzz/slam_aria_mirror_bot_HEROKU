@@ -119,12 +119,10 @@ def yandex_disk(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
     except IndexError:
-        reply = "`No Yandex.Disk links found`\n"
-        return reply
+        return "`No Yandex.Disk links found`\n"
     api = 'https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key={}'
     try:
-        dl_url = requests.get(api.format(link)).json()['href']
-        return dl_url
+        return requests.get(api.format(link)).json()['href']
     except KeyError:
         raise DirectDownloadLinkException("`Error: File not found/Download limit reached`\n")
 
@@ -144,8 +142,7 @@ def cm_ru(url: str) -> str:
         data = json.loads(result)
     except json.decoder.JSONDecodeError:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
-    dl_url = data['download']
-    return dl_url
+    return data['download']
 
 
 def uptobox(url: str) -> str:
@@ -180,8 +177,7 @@ def mediafire(url: str) -> str:
         raise DirectDownloadLinkException("`No MediaFire links found`\n")
     page = BeautifulSoup(requests.get(link).content, 'lxml')
     info = page.find('a', {'aria-label': 'Download file'})
-    dl_url = info.get('href')
-    return dl_url
+    return info.get('href')
 
 
 def osdn(url: str) -> str:
@@ -211,8 +207,7 @@ def github(url: str) -> str:
         raise DirectDownloadLinkException("`No GitHub Releases links found`\n")
     download = requests.get(url, stream=True, allow_redirects=False)
     try:
-        dl_url = download.headers["location"]
-        return dl_url
+        return download.headers["location"]
     except KeyError:
         raise DirectDownloadLinkException("`Error: Can't extract the link`\n")
 
@@ -261,10 +256,8 @@ def fembed(link: str) -> str:
     Based on https://github.com/breakdowns/slam-mirrorbot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_fembed(link)
-    lst_link = []
     count = len(dl_url)
-    for i in dl_url:
-        lst_link.append(dl_url[i])
+    lst_link = [dl_url[i] for i in dl_url]
     return lst_link[count-1]
 
 
@@ -273,10 +266,8 @@ def sbembed(link: str) -> str:
     Based on https://github.com/breakdowns/slam-mirrorbot """
     bypasser = lk21.Bypass()
     dl_url=bypasser.bypass_sbembed(link)
-    lst_link = []
     count = len(dl_url)
-    for i in dl_url:
-        lst_link.append(dl_url[i])
+    lst_link = [dl_url[i] for i in dl_url]
     return lst_link[count-1]
 
 

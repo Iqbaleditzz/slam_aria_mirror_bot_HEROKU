@@ -221,66 +221,42 @@ except KeyError:
     BUTTON_SIX_URL = None
 try:
     STOP_DUPLICATE_MIRROR = getConfig('STOP_DUPLICATE_MIRROR')
-    if STOP_DUPLICATE_MIRROR.lower() == 'true':
-        STOP_DUPLICATE_MIRROR = True
-    else:
-        STOP_DUPLICATE_MIRROR = False
+    STOP_DUPLICATE_MIRROR = STOP_DUPLICATE_MIRROR.lower() == 'true'
 except KeyError:
     STOP_DUPLICATE_MIRROR = False
 try:
     STOP_DUPLICATE_MEGA = getConfig('STOP_DUPLICATE_MEGA')
-    if STOP_DUPLICATE_MEGA.lower() == 'true':
-        STOP_DUPLICATE_MEGA = True
-    else:
-        STOP_DUPLICATE_MEGA = False
+    STOP_DUPLICATE_MEGA = STOP_DUPLICATE_MEGA.lower() == 'true'
 except KeyError:
     STOP_DUPLICATE_MEGA = False
 try:
     VIEW_LINK = getConfig('VIEW_LINK')
-    if VIEW_LINK.lower() == 'true':
-        VIEW_LINK = True
-    else:
-        VIEW_LINK = False
+    VIEW_LINK = VIEW_LINK.lower() == 'true'
 except KeyError:
     VIEW_LINK = False
 try:
     STOP_DUPLICATE_CLONE = getConfig('STOP_DUPLICATE_CLONE')
-    if STOP_DUPLICATE_CLONE.lower() == 'true':
-        STOP_DUPLICATE_CLONE = True
-    else:
-        STOP_DUPLICATE_CLONE = False
+    STOP_DUPLICATE_CLONE = STOP_DUPLICATE_CLONE.lower() == 'true'
 except KeyError:
     STOP_DUPLICATE_CLONE = False
 try:
     IS_TEAM_DRIVE = getConfig('IS_TEAM_DRIVE')
-    if IS_TEAM_DRIVE.lower() == 'true':
-        IS_TEAM_DRIVE = True
-    else:
-        IS_TEAM_DRIVE = False
+    IS_TEAM_DRIVE = IS_TEAM_DRIVE.lower() == 'true'
 except KeyError:
     IS_TEAM_DRIVE = False
 try:
     USE_SERVICE_ACCOUNTS = getConfig('USE_SERVICE_ACCOUNTS')
-    if USE_SERVICE_ACCOUNTS.lower() == 'true':
-        USE_SERVICE_ACCOUNTS = True
-    else:
-        USE_SERVICE_ACCOUNTS = False
+    USE_SERVICE_ACCOUNTS = USE_SERVICE_ACCOUNTS.lower() == 'true'
 except KeyError:
     USE_SERVICE_ACCOUNTS = False
 try:
     BLOCK_MEGA_FOLDER = getConfig('BLOCK_MEGA_FOLDER')
-    if BLOCK_MEGA_FOLDER.lower() == 'true':
-        BLOCK_MEGA_FOLDER = True
-    else:
-        BLOCK_MEGA_FOLDER = False
+    BLOCK_MEGA_FOLDER = BLOCK_MEGA_FOLDER.lower() == 'true'
 except KeyError:
     BLOCK_MEGA_FOLDER = False
 try:
     BLOCK_MEGA_LINKS = getConfig('BLOCK_MEGA_LINKS')
-    if BLOCK_MEGA_LINKS.lower() == 'true':
-        BLOCK_MEGA_LINKS = True
-    else:
-        BLOCK_MEGA_LINKS = False
+    BLOCK_MEGA_LINKS = BLOCK_MEGA_LINKS.lower() == 'true'
 except KeyError:
     BLOCK_MEGA_LINKS = False
 try:

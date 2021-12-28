@@ -17,27 +17,27 @@ def cloneNode(update, context):
             if res != "":
                sendMessage(res, context.bot, update)
                return
-            if STOP_DUPLICATE_CLONE:
-                LOGGER.info(f"Checking File/Folder if already in Drive...")
-                smsg, button = gd.drive_list(name)
-                if smsg:
-                    msg3 = "File/Folder is already available in Drive.\nHere are the search results:"
-                    sendMarkup(msg3, context.bot, update, button)
+        if STOP_DUPLICATE_CLONE:
+            LOGGER.info('Checking File/Folder if already in Drive...')
+            smsg, button = gd.drive_list(name)
+            if smsg:
+                msg3 = "File/Folder is already available in Drive.\nHere are the search results:"
+                sendMarkup(msg3, context.bot, update, button)
+                return
+        if CLONE_LIMIT is not None:
+            LOGGER.info('Checking File/Folder Size...')
+            limit = CLONE_LIMIT
+            limit = limit.split(' ', maxsplit=1)
+            limitint = int(limit[0])
+            msg2 = f'Failed, Clone limit is {CLONE_LIMIT}.\nYour File/Folder size is {get_readable_file_size(clonesize)}.'
+            if 'G' in limit[1] or 'g' in limit[1]:
+                if clonesize > limitint * 1024**3:
+                    sendMessage(msg2, context.bot, update)
                     return
-            if CLONE_LIMIT is not None:
-                LOGGER.info(f"Checking File/Folder Size...")
-                limit = CLONE_LIMIT
-                limit = limit.split(' ', maxsplit=1)
-                limitint = int(limit[0])
-                msg2 = f'Failed, Clone limit is {CLONE_LIMIT}.\nYour File/Folder size is {get_readable_file_size(clonesize)}.'
-                if 'G' in limit[1] or 'g' in limit[1]:
-                    if clonesize > limitint * 1024**3:
-                        sendMessage(msg2, context.bot, update)
-                        return
-                elif 'T' in limit[1] or 't' in limit[1]:
-                    if clonesize > limitint * 1024**4:
-                        sendMessage(msg2, context.bot, update)
-                        return              
+            elif 'T' in limit[1] or 't' in limit[1]:
+                if clonesize > limitint * 1024**4:
+                    sendMessage(msg2, context.bot, update)
+                    return
         msg = sendMessage(f"Cloning: <code>{link}</code>", context.bot, update)
         result, button = gd.clone(link)
         deleteMessage(context.bot, msg)
