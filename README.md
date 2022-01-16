@@ -8,7 +8,7 @@ Give Star & Fork this repo, then upload **token.pickle** & **credentials.json** 
 to know how to get them click on the  #[ link ](https://github.com/ayushteke/slam_aria_mirror_bot_HEROKU#getting-google-oauth-api-credential-file)
 
 Click on the below button 👇👇👇👇
-<p><a href="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fiqbaleditzz%2Fslam_aria_mirror_bot_HEROKU&template=https%3A%2F%2Fgithub.com%2Fkamileecher%2FEditX-MirrorX"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fiqbaleditzz%2Fslam_aria_mirror_bot_HEROKU&template=https%3A%2F%2Fgithub.com%2Fiqbaleditzz%2Fslam_aria_mirror_bot_HEROKU"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 
 ## Features supported:
